@@ -23,7 +23,7 @@ class Disciplina {
     std::string getNomeProfessor();
 
     bool adicionarAluno(Pessoa *aluno);
-    std::list<Pessoa*> getVetorAlunos();
+    std::list<Pessoa*> &getListaAlunos();
 
     // int getQtdeAlunos();
     // void setQtdeAlunos(unsigned short int qtdeAlunos);

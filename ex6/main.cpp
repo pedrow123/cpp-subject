@@ -23,23 +23,24 @@ int main() {
               << " Carga Horaria Mínima: "
               << d1->getCursoVinculado().getCargaHorariaMinima() << '\n';
 
-    std::list<Pessoa*>::iterator it{d1->getVetorAlunos().begin()};
-    for ( ; it != d1->getVetorAlunos().end(); ++it) {
+    std::list<Pessoa*>::iterator it{d1->getListaAlunos().begin()};
+    for (; it != d1->getListaAlunos().end(); ++it) {
         std::cout << (*it)->getNome() << '\n';
-        delete *it;
     }
 
     d1->removerAluno(22222222222);
     d1->removerAluno(p3);
 
-    for (d1->getVetorAlunos().begin(); it != d1->getVetorAlunos().end(); ++it) {
+    std::cout << "Nova lista: \n";
+
+    for (it = d1->getListaAlunos().begin(); it != d1->getListaAlunos().end();
+         ++it) {
         std::cout << (*it)->getNome() << '\n';
-        delete *it;
     }
 
     delete p1;
-    delete p2;
-    delete p3;
+    delete p4;
+
     delete d1;
 
     return 0;
