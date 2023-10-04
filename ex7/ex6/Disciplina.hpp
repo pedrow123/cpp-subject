@@ -2,6 +2,7 @@
 #define DISCIPLINA_HPP
 
 #include <string>
+#include <list>
 
 #include "Curso.hpp"
 #include "Pessoa.hpp"
@@ -22,10 +23,13 @@ class Disciplina {
     std::string getNomeProfessor();
 
     bool adicionarAluno(Pessoa *aluno);
-    Pessoa **getVetorAlunos();
+    std::list<Pessoa*> &getListaAlunos();
 
-    int getQtdeAlunos();
-    void setQtdeAlunos(unsigned short int qtdeAlunos);
+    // int getQtdeAlunos();
+    // void setQtdeAlunos(unsigned short int qtdeAlunos);
+
+    bool removerAluno(Pessoa* aluno);
+    bool removerAluno(unsigned long int cpf);
 
     Curso &getCursoVinculado();
 
@@ -33,8 +37,8 @@ class Disciplina {
     std::string nome;
     unsigned short int cargaHoraria;
     Pessoa *professor;
-    Pessoa *alunos[50];
+    std::list<Pessoa*> alunos;
     Curso &cursoVinculado;
-    unsigned short int qtdeAlunos;
+    // unsigned short int qtdeAlunos;
 };
 #endif

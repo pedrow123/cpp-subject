@@ -5,10 +5,7 @@ Disciplina::Disciplina(std::string nome, Curso& cursoVinculado)
 
 Disciplina::Disciplina(std::string nome, Pessoa* professor,
                        Curso& cursoVinculado)
-    : nome{nome},
-      professor{professor},
-      cursoVinculado{cursoVinculado},
-      qtdeAlunos{0} {}
+    : nome{nome}, professor{professor}, cursoVinculado{cursoVinculado} {}
 
 std::string Disciplina::getNome() { return this->nome; }
 
@@ -31,20 +28,36 @@ std::string Disciplina::getNomeProfessor() {
 }
 
 bool Disciplina::adicionarAluno(Pessoa* aluno) {
-    if (getQtdeAlunos() < 50) {
-        this->alunos[getQtdeAlunos()] = aluno;
-        setQtdeAlunos(getQtdeAlunos() + 1);
+    if (getListaAlunos().size() < 50) {
+        getListaAlunos().push_back(aluno);
         return true;
     }
     return false;
 }
 
-int Disciplina::getQtdeAlunos() { return this->qtdeAlunos; }
-
-void Disciplina::setQtdeAlunos(unsigned short int qtdeAlunos) {
-    this->qtdeAlunos = qtdeAlunos;
+bool Disciplina::removerAluno(Pessoa* aluno) {
+    if (getListaAlunos().size() > 0) {
+        getListaAlunos().remove(aluno);
+        delete aluno;
+        return true;
+    }
+    return false;
 }
 
-Pessoa** Disciplina::getVetorAlunos() { return this->alunos; }
+bool Disciplina::removerAluno(unsigned long int cpf) {
+    std::list<Pessoa*>::iterator it;
+    for (it = getListaAlunos().begin(); it != getListaAlunos().end(); ++it) {
+        if ((*it)->getCpf() == cpf) break;
+    }
+    if (it != getListaAlunos().end()) {
+        Pessoa* ptr{*it};
+        getListaAlunos().erase(it);
+        delete ptr;
+        return true;
+    }
+    return false;
+}
+
+std::list<Pessoa*>& Disciplina::getListaAlunos() { return this->alunos; }
 
 Curso& Disciplina::getCursoVinculado() { return this->cursoVinculado; }
