@@ -1,11 +1,26 @@
 #include <iostream>
 
 #include "Pessoa.hpp"
-#include "ProfessorEngenheiro.hpp"
 
-int main(){
-    ProfessorEngenheiro pe{"Maria", 11111111111,85, 40, 1234};
-    std::cout << "Nome: " << pe.getNome() << "\tSalario R$" << pe.getSalario() <<",00\n";
-
-    return 0;
+int main() {
+	Pessoa* p{nullptr};
+	std::string nome;
+	unsigned long cpf;
+	unsigned short int idade;
+	std::cout << "Digite o nome: ";
+	std::cin >> nome;
+	std::cout << "Digite o cpf: ";
+	std::cin >> cpf;
+	std::cout << "Digite a idade: ";
+	std::cin >> idade;
+	try {
+    	p = new Pessoa{nome, cpf, 18};
+    	p->setIdade(idade);
+    	std::cout << p->getNome() << " " << p->getCpf() << " " << p->getIdade()
+              	<< std::endl;
+	} catch (std::invalid_argument& iv) {
+    	std::cout << "Argumento invalido: " << iv.what() << '\n';
+	}
+	delete p;
+	return 0;
 }

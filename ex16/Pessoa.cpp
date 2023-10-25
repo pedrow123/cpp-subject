@@ -22,12 +22,8 @@ unsigned long Pessoa::getCpf() const {
 }
 
 void Pessoa::setCpf(const uint64_t cpf) {
-    if (validarCPF(cpf)) {
-        this->cpf = cpf;
-        return;
-    }
-    this->cpf = 0;  // indica que não é um cpf válido
-    return;
+    if (!validarCPF(cpf)) throw (int)1;
+    this->cpf = cpf;
 }
 
 std::string Pessoa::getNome() const { return this->nome; }
@@ -39,10 +35,10 @@ unsigned short int Pessoa::getIdade() const {
 }
 
 void Pessoa::setIdade(const unsigned short int novaIdade) {
-    if (novaIdade < 120)
-        idade = (unsigned char)novaIdade;
+    if (novaIdade > 120)
+        throw std::invalid_argument{"Idade inválida.\n"};
     else
-        idade = 0;  // indicar erro
+        idade = (unsigned char)novaIdade;  // indicar erro
 }
 
 bool Pessoa::validarCPF(unsigned long cpfTeste) const {
