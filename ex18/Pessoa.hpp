@@ -23,6 +23,13 @@ class Pessoa {
     unsigned short int getIdade() const;
     void setIdade(const unsigned short novaIdade);
 
+    bool operator==(const Pessoa& outra) const;
+    bool operator!=(const Pessoa& outra) const;
+    bool operator<(const Pessoa& outra) const;
+    bool operator>(const Pessoa& outra) const;
+    bool operator<=(const Pessoa& outra) const;
+    bool operator>=(const Pessoa& outra) const;
+
    private:
     std::string nome;
     CPF cpf;

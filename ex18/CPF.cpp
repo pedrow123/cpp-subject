@@ -37,6 +37,28 @@ bool CPF::operator>=(const CPF& outro) const {
 	return this->numero >= outro.numero;
 }
 
+std::istream& operator>>(std::istream& is, CPF& cpf) {
+    uint64_t numero;
+    is >> numero;
+    cpf.setNumero(numero); // Você deve implementar um método setNumero que valide o CPF
+    return is;
+}
+
+// Implementação do operador [] para acessar um dígito do CPF
+unsigned short CPF::operator[](int idx) const {
+    if (idx < 0 || idx > 10) {
+        throw std::out_of_range("Índice fora dos limites para acesso aos dígitos do CPF.");
+    }
+
+    // Extrai o dígito correspondente ao índice
+    uint64_t temp = this->numero;
+    for (int i = 0; i < (10 - idx); i++) {
+        temp /= 10;
+    }
+
+    return static_cast<unsigned short>(temp % 10);
+}
+
 bool CPF::validarCPF(uint64_t cpfTeste) const {
     unsigned int somatorioValidaUltimo;
     unsigned int modulo;
