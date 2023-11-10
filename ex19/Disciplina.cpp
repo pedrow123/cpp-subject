@@ -120,4 +120,52 @@ void Disciplina::setEmenta(const Ementa& ementa){
 const Ementa& Disciplina::getEmenta() const{
     return this->ementa;
 }
+
+Disciplina& Disciplina::operator=(const Disciplina& outraDisciplina) {
+    if (this != &outraDisciplina) {
+        this->nome = outraDisciplina.nome;
+        this->sala = outraDisciplina.sala; 
+        this->tipo = outraDisciplina.tipo;
+        this->cargaHoraria = outraDisciplina.cargaHoraria;
+        this->professor = outraDisciplina.professor;
+        this->ementa = outraDisciplina.ementa;
+
+        // Limpar conteúdos existentes
+        std::list<ConteudoMinistrado*>::iterator it;
+        for (it = conteudos.begin(); it != conteudos.end(); it++)
+            delete *it;
+        conteudos.clear();
+
+        // Copiar conteúdos da outra disciplina
+        for (const auto& conteudo : outraDisciplina.conteudos) {
+            this->conteudos.push_back(new ConteudoMinistrado(*conteudo));
+        }
+
+        // Copiar alunos
+        this->alunos = outraDisciplina.alunos;
+    }
+    return *this;
+}
+
+// Operador de Igualdade
+bool Disciplina::operator==(const Disciplina& outraDisciplina) const {
+    return this->nome == outraDisciplina.nome &&
+        this->sala == outraDisciplina.sala &&
+        this->tipo == outraDisciplina.tipo &&
+        this->cargaHoraria == outraDisciplina.cargaHoraria &&
+        this->professor == outraDisciplina.professor &&
+        this->conteudos == outraDisciplina.conteudos &&
+        this->alunos == outraDisciplina.alunos;
+}
+
+// Operador de Desigualdade
+bool Disciplina::operator!=(const Disciplina& outraDisciplina) const {
+    return !(*this == outraDisciplina);
+}
+
+// Atribuição de Conteúdos Ministrados
+void Disciplina::operator+=(const ConteudoMinistrado& conteudoMinistrado) {
+    this->conteudos.push_back(new ConteudoMinistrado(conteudoMinistrado));
+}
+
 }

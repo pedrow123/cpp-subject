@@ -50,6 +50,11 @@ class Disciplina {
     void setEmenta(const Ementa& ementa);
     const Ementa& getEmenta() const;
 
+    Disciplina& operator=(const Disciplina& outraDisciplina);
+    bool operator==(const Disciplina& outraDisciplina) const;
+    bool operator!=(const Disciplina& outraDisciplina) const;
+    void operator+=(const ConteudoMinistrado& conteudoMinistrado);
+
    private:
     std::string nome;
     unsigned short int cargaHoraria;
