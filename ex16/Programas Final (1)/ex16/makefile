@@ -3,8 +3,8 @@ nomePrograma=aula
 
 all: $(nomePrograma)
 
-$(nomePrograma): main.o Pessoa.o Disciplina.o SalaAula.o ConteudoMinistrado.o Console.o Professor.o ProfessorAdjunto.o Engenheiro.o ProfessorEngenheiro.o
-	g++ -o $(nomePrograma) main.o Pessoa.o Disciplina.o SalaAula.o ConteudoMinistrado.o Console.o Professor.o ProfessorAdjunto.o Engenheiro.o ProfessorEngenheiro.o $(parametrosCompilacao)
+$(nomePrograma): main.o Pessoa.o Disciplina.o SalaAula.o ConteudoMinistrado.o Console.o Professor.o ProfessorAdjunto.o Engenheiro.o ProfessorEngenheiro.o CPFInvalidoException.o ProfessorInexistente.o
+	g++ -o $(nomePrograma) main.o Pessoa.o Disciplina.o SalaAula.o ConteudoMinistrado.o Console.o Professor.o ProfessorAdjunto.o Engenheiro.o ProfessorEngenheiro.o CPFInvalidoException.o ProfessorInexistente.o $(parametrosCompilacao)
 
 main.o: main.cpp
 	g++ -c main.cpp $(parametrosCompilacao)
@@ -35,6 +35,12 @@ ConteudoMinistrado.o: ConteudoMinistrado.hpp ConteudoMinistrado.cpp
 
 Console.o: Console.hpp Console.cpp
 	g++ -c Console.cpp $(parametrosCompilacao)
+
+CPFInvalidoException.o: CPFInvalidoException.hpp CPFInvalidoException.cpp
+	g++ -c CPFInvalidoException.cpp $(parametrosCompilacao)
+
+ProfessorInexistenteException.o: ProfessorInexistenteException.hpp ProfessorInexistenteException.cpp
+	g++ -c ProfessorInexistenteException.cpp $(parametrosCompilacao)
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)

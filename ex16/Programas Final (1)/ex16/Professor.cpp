@@ -1,3 +1,5 @@
+#include<stdexcept>
+
 #include "Professor.hpp"
 
 Professor::Professor(const std::string& nome, const unsigned long cpf,
@@ -18,8 +20,9 @@ unsigned int Professor::getValorHora() const{
 }
 
 void Professor::setCargaHoraria(const unsigned short cargaHoraria){
-    if(cargaHoraria > 0)
-        this->cargaHoraria = cargaHoraria;
+    if(cargaHoraria < 0)
+        throw std::invalid_argument{"Carga Horaria Invalida."};
+    this->cargaHoraria = cargaHoraria;
 }
 
 unsigned short Professor::getCargaHoraria() const{
